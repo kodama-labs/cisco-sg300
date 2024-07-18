@@ -1,0 +1,21 @@
+# All of these variables can be overriden by inventory variables, playbook vars, etc.
+
+ansible_network_os: community.ciscosmb.ciscosmb
+ansible_become_method: "enable"
+ansible_ssh_port: 22
+# ansible_host_key_checking: false
+
+# had better luck with libssh versus paramiko
+ansible_network_cli_ssh_type: libssh
+#ansible_network_cli_ssh_type: paramiko
+
+ansible_connection: network_cli
+
+# neither of these work, but they should.
+
+# ansible_ssh_common_args: "-F config/switch1-ssh-config"
+# ansible_ssh_common_args: >-
+#   -o KexAlgorithms +diffie-hellman-group1-sha1,diffie-hellman-group-exchange-sha1  
+#  -o MACs +hmac-sha1  
+#  -o HostKeyAlgorithms +ssh-rsa  
+#  -o PubkeyAcceptedKeyTypes +ssh-rsa  

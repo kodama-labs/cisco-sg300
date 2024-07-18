@@ -1,0 +1,16 @@
+---
+- name: disable
+  become: no
+  community.ciscosmb.command:
+    commands:
+      - disable
+- name: CiscoSMB - show run
+  become: yes
+  community.ciscosmb.command:
+    commands:
+      - show run
+  register: show_run
+
+- name: show output
+  ansible.builtin.debug: 
+    var:  show_run

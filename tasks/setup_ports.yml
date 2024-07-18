@@ -1,0 +1,42 @@
+---
+- name: disable
+  become: no
+  community.ciscosmb.command:
+    commands:
+      - disable
+
+- name: configure trunk ports
+  become: yes
+  loop: "{{ports | selectattr('trunk', 'defined') | list}}"
+  community.ciscosmb.command:
+    commands:
+      - configure terminal
+      - "interface gigabitethernet{{item.port}}"
+      - "switchport mode trunk"
+      - "switchport trunk native vlan {{item.access}}"
+      - "switchport trunk allowed vlan add {{item.trunk | join(',') }}"
+      - "{% if item.active is not defined or item.active %} no {% endif %} shutdown"
+      - end
+
+
+- name: configure access ports
+  become: yes
+  loop: "{{ports | selectattr('trunk', 'undefined') | list}}"
+  community.ciscosmb.command:
+    commands:
+      - configure terminal
+      - "interface gigabitethernet{{item.port}}"
+      - "switchport mode access"
+      - "switchport access vlan {{item.access}}"
+      - "{% if item.active is not defined or item.active %} no {% endif %} shutdown"
+      - end
+
+- name: ports that are off
+  become: yes
+  loop: "{{ports_off}}"
+  community.ciscosmb.command:
+    commands:
+      - configure terminal
+      - "interface gigabitethernet{{item}}"
+      - shut
+      - end

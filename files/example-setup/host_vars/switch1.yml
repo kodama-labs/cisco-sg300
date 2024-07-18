@@ -1,0 +1,4 @@
+# this would be named host_vars/host_name.yml, where host_name is the name defined in your inventory file.
+#  So for the sample inventory file, it would be host_vars/switch1.yml
+ansible_ssh_user: my_ssh_username
+ansible_become_password: "my_become_password"

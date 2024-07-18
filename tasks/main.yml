@@ -1,0 +1,5 @@
+---
+- include_tasks: show_run.yml
+  when: "'show_run' in actions"
+- include_tasks: setup_ports.yml
+  when: "'setup_ports' in actions"

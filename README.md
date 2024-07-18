@@ -1,0 +1,3 @@
+# Ansible role for Cisco SG-300
+
+This is a simple ansible role that I developed for my small business cisco switch. It just has a few actions so far, like for configuring port vlan tags and grabbing configuration. You can specify which actions you want to run by simply specifying an `actions` variable with the tasks that you want run (take a look at main.yml for all the possible actions). Please also reference files/example-setup/README.md for how to set up a basic ansible project to leverage this role.

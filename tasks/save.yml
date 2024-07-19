@@ -1,0 +1,11 @@
+---
+- name: disable
+  become: no
+  community.ciscosmb.command:
+    commands:
+      - disable
+- name: CiscoSMB - save to starting config
+  become: yes
+  community.ciscosmb.command:
+    commands:
+      - copy run start

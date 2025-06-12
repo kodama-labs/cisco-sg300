@@ -13,7 +13,7 @@
       - configure terminal
       - "interface gigabitethernet{{item.port}}"
       - "switchport mode trunk"
-      - "switchport trunk native vlan {{item.access}}"
+      - "{% if item.access is defined %} switchport trunk native vlan {{item.access}} {% endif %}"
       - "switchport trunk allowed vlan add {{item.trunk | join(',') }}"
       - "{% if item.active is not defined or item.active %} no {% endif %} shutdown"
       - end
